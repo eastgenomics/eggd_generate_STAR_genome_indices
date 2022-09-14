@@ -29,7 +29,7 @@
         {
         "name": "gtf_file",
         "label": "gtf_file",
-        "help": "GGTF annotated transcripts",
+        "help": "GTF annotated transcripts",
         "class": "file",
         "patterns": ["*"],
         "default": {"$dnanexus_link": "file-GGFQFPj42QQxkykZ73z9GGg5"}, 

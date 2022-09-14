@@ -20,14 +20,15 @@ SENTIEON_BIN_DIR=$(echo $SENTIEON_INSTALL_DIR/bin)
 
 export PATH="$SENTIEON_BIN_DIR:$PATH"
 
+## Generate genome indices
+# Define input variables for STAR command
 NUMBER_THREADS=32
-export REFERENCE=/home/dnanexus/reference_genome/*.fa # Reference genome, standard GRCh38
-echo $REFERENCE
-GTF=/home/dnanexus/in/gtf_file/*gtf
+export REFERENCE=/home/dnanexus/reference_genome/*.fa  # Reference genome, standard GRCh38
+GTF=/home/dnanexus/in/gtf_file/*gtf  # Input .gtf annotation file
 READ_LENGTH_MINUS_1=100
 OUTPUT_DIR=/home/dnanexus/out/output_indices
 
-
+# Run STAR command to generate genome indices
 sentieon STAR --runThreadN ${NUMBER_THREADS} --runMode genomeGenerate --genomeDir ${OUTPUT_DIR} --genomeFastaFiles ${REFERENCE} --sjdbGTFfile ${GTF} --sjdbOverhang ${READ_LENGTH_MINUS_1}
 
 dx-upload-all-outputs
