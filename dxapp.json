@@ -1,0 +1,83 @@
+{
+    "name": "make_genome_indices",
+    "title": "make_genome_indices",
+    "summary": "Make indices",
+    "dxapi": "1.0.0",
+    "version": "1.0.0",
+    "properties": {
+      "githubRelease": "v1.0.0"
+    },
+    "inputSpec": [
+        {
+        "name": "sentieon_tar",
+        "label": "sentieon_tar",
+        "help": "tarballed sentieon",
+        "class": "file",
+        "patterns": ["sentieon-genomics-*.tar.gz"],
+        "default": {"$dnanexus_link": "file-GFbv1x841V8V2zFP8vKf37QZ"}, 
+        "optional": false
+        },
+        {
+        "name": "reference_genome",
+        "label": "reference_genome",
+        "help": "GRCh38 reference genome FASTA + index",
+        "class": "file",
+        "patterns": ["*"],
+        "default": {"$dnanexus_link": "file-Fy4j2G04qB6zQK885B5Q8Pqp"}, 
+        "optional": false
+        },
+        {
+        "name": "gtf_file",
+        "label": "gtf_file",
+        "help": "GGTF annotated transcripts",
+        "class": "file",
+        "patterns": ["*"],
+        "default": {"$dnanexus_link": "file-GGFQFPj42QQxkykZ73z9GGg5"}, 
+        "optional": false
+        }
+    ],
+    "outputSpec": [
+      {
+        "name": "output_indices",
+        "label": "Output genome indices",
+        "class": "file",
+        "optional": true,
+        "patterns": [
+          "*"
+        ],
+        "help": ""
+      }
+    ],
+    "runSpec": {
+      "distribution": "Ubuntu",
+      "release": "20.04",
+      "version": "0",
+      "interpreter": "bash",
+      "file": "src/script.sh",
+      "timeoutPolicy": {
+        "*": {
+          "hours": 1
+        }
+      }
+    },
+    "developers":[
+      "org-emee_1"
+    ],
+    "authorizedUsers": [
+      "org-emee_1"
+    ],
+    "access": {
+      "project": "CONTRIBUTE",
+      "network": ["*"],
+      "allProjects": "VIEW"
+    },
+    "regionalOptions": {
+      "aws:eu-central-1": {
+        "systemRequirements": {
+          "*": {
+            "instanceType": "mem1_ssd1_x32"
+          }
+        }
+      }
+    }
+  }
