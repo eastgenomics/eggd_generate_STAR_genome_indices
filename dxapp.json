@@ -29,10 +29,10 @@
         {
         "name": "gtf_file",
         "label": "gtf_file",
-        "help": "GTF annotated transcripts",
+        "help": "Gzipped GTF annotated transcripts",
         "class": "file",
-        "patterns": ["*"],
-        "default": {"$dnanexus_link": "file-GGFQFPj42QQxkykZ73z9GGg5"}, 
+        "patterns": ["*.gz"],
+        "default": {"$dnanexus_link": "file-GGfq5Kj42QQkjj6f4kjG418x"}, 
         "optional": false
         }
     ],
