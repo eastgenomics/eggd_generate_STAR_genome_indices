@@ -9,7 +9,7 @@ This app uses a .gtf file of transcripts and the Sentieon STAR tool to generate 
 * `--gtf_file`: (file) File providing gene transcript information. Currently defaults to the GENCODE gtf v41 (gencode.v41.annotation.gtf.gz)
 
 ## How does this app work?
-eggd_make_genome_indices takes an input .gtf file of transcript data, and a reference geneome. It creates genome indices.
+eggd_make_genome_indices takes an input .gtf file of transcript data, and a reference genome. It creates genome indices.
 
 ## What does this app output?
 eggd_make_genome_indices outputs a gzipped file of genome indices.
