@@ -1,7 +1,7 @@
 {
-    "name": "make_genome_indices",
-    "title": "make_genome_indices",
-    "summary": "Make indices",
+    "name": "eggd_generate_STAR_genome_indices",
+    "title": "eggd_generate_STAR_genome_indices",
+    "summary": "This app uses Sentieon's STAR to make genome indices from an input GTF file",
     "dxapi": "1.0.0",
     "version": "1.0.0",
     "properties": {
@@ -18,18 +18,18 @@
         "optional": false
         },
         {
-        "name": "reference_genome",
-        "label": "reference_genome",
-        "help": "GRCh38 reference genome FASTA + index",
+        "name": "reference_genome_fasta_and_index",
+        "label": "reference_genome_fasta_and_index",
+        "help": "Tarballed GRCh38 reference genome FASTA + index",
         "class": "file",
-        "patterns": ["*"],
+        "patterns": ["*.tar.gz"],
         "default": {"$dnanexus_link": "file-Fy4j2G04qB6zQK885B5Q8Pqp"}, 
         "optional": false
         },
         {
         "name": "gtf_file",
         "label": "gtf_file",
-        "help": "Gzipped GTF annotated transcripts",
+        "help": "Gzipped gene annotation on reference chromosomes and scaffolds in GTF format",
         "class": "file",
         "patterns": ["*.gz"],
         "default": {"$dnanexus_link": "file-GGfq5Kj42QQkjj6f4kjG418x"}, 
@@ -38,7 +38,7 @@
     ],
     "outputSpec": [
       {
-        "name": "output_indices",
+        "name": "output_genome_indices",
         "label": "Output genome indices",
         "class": "file",
         "optional": true,
@@ -56,7 +56,7 @@
       "file": "src/script.sh",
       "timeoutPolicy": {
         "*": {
-          "hours": 1
+          "hours": 3
         }
       }
     },
