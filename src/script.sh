@@ -32,7 +32,6 @@ INSTANCE=$(dx describe --json $DX_JOB_ID | jq -r '.instanceType')  # Extract ins
 NUMBER_THREADS=${INSTANCE##*_x}
 export REFERENCE=/home/dnanexus/reference_genome_fasta_and_index/*.fa  # Reference genome, standard GRCh38
 GTF=/home/dnanexus/in/gtf_file/*gtf  # Input .gtf annotation file
-READ_LENGTH_MINUS_1=99
 OUTPUT_DIR=/home/dnanexus/output_genome_indices
 
 # Run STAR command to generate genome indices
@@ -41,7 +40,7 @@ sentieon STAR --runThreadN ${NUMBER_THREADS} \
     --genomeDir ${OUTPUT_DIR} \
     --genomeFastaFiles ${REFERENCE} \
     --sjdbGTFfile ${GTF} \
-    --sjdbOverhang ${READ_LENGTH_MINUS_1}
+    --sjdbOverhang ${read_length_minus_one}
 
 # Tar and gzip output file
 tar -czvf output_genome_indices.tar.gz /home/dnanexus/output_genome_indices
