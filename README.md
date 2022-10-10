@@ -1,4 +1,4 @@
-# eggd_make_genome_indices
+# eggd_generate_STAR_genome_indices
 
 ## What does this app do?
 This app uses a .gtf file of transcripts and the Sentieon STAR tool to generate genome indices, which will annotate a b38 reference genome.
@@ -9,12 +9,9 @@ This app uses a .gtf file of transcripts and the Sentieon STAR tool to generate 
 * `--gtf_file`: (file) File providing gene transcript information. Currently defaults to the GENCODE gtf v41 (gencode.v41.annotation.gtf.gz)
 
 ## How does this app work?
-eggd_make_genome_indices takes an input .gtf file of transcript data, and a reference genome. It creates genome indices.
+eggd_make_genome_indices takes an input .gtf file of transcript data, and a reference genome. It uses Sentieon's STAR to create genome indices for use with STAR Fusion.
 
 ## What does this app output?
 eggd_make_genome_indices outputs a gzipped file of genome indices.
-
-## Notes
-* This app is not ready for production use
 
 ## This app was made by East GLH
