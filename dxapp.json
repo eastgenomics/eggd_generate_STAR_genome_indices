@@ -27,8 +27,8 @@
         "optional": false
         },
         {
-        "name": "gtf_file",
-        "label": "gtf_file",
+        "name": "annotated_transcripts_gtf",
+        "label": "annotated_transcripts_gtf",
         "help": "Gzipped gene annotation on reference chromosomes and scaffolds in GTF format",
         "class": "file",
         "patterns": ["*.gz"],
@@ -39,7 +39,7 @@
           "name": "read_length_minus_one",
           "label": "read_length_minus_one",
           "help": "Read length of data with which the genome indices will be used. Standard for Illumina instruments is 100; so the default for read length minus one is 99",
-          "class": "file",
+          "class": "int",
           "patterns": ["*"],
           "default": 99, 
           "optional": false
@@ -47,7 +47,7 @@
     ],
     "outputSpec": [
       {
-        "name": "output_genome_indices",
+        "name": "genome_indices",
         "label": "Output genome indices",
         "class": "file",
         "optional": true,
