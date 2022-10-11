@@ -1,7 +1,7 @@
 {
     "name": "eggd_generate_STAR_genome_indices",
     "title": "eggd_generate_STAR_genome_indices",
-    "summary": "This app uses Sentieon's STAR to make genome indices from an input GTF file",
+    "summary": "This app uses Sentieon's STAR to make genome indices from an input GTF file and reference genome",
     "dxapi": "1.0.0",
     "version": "1.0.0",
     "properties": {

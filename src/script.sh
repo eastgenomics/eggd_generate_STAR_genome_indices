@@ -50,7 +50,6 @@ FILENAME=ref_${CUT_REFERENCE}-gtf_${CUT_GTF}-readlength${READLENGTH}
 
 # Configure output directories with output filename 
 mkdir /home/dnanexus/$FILENAME
-mkdir -p /home/dnanexus/out/$FILENAME
 
 ## Generate genome indices
 # Define input variables for STAR command
@@ -70,8 +69,7 @@ sentieon STAR --runThreadN ${NUMBER_THREADS} \
 # Tar and gzip output file
 tar -czvf $FILENAME.tar.gz /home/dnanexus/$FILENAME
 # Move to /out/ folder to allow output to be uploaded
-mv $FILENAME.tar.gz /home/dnanexus/out/$FILENAME
+#mv $FILENAME.tar.gz /home/dnanexus/out/$FILENAME
 
-output_indices=$(dx upload /home/dnanexus/out/$FILENAME/$FILENAME.tar.gz --brief)
+output_indices=$(dx upload /home/dnanexus/$FILENAME.tar.gz --brief)
 dx-jobutil-add-output genome_indices "$output_indices" --class=file
-dx-upload-all-outputs
