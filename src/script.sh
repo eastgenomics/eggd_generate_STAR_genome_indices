@@ -45,8 +45,7 @@ CUT_REFERENCE=${REFNAME##*/}
 CUT_REFERENCE=${CUT_REFERENCE%.fasta-index.tar.gz*}
 CUT_GTF=${GTFNAME##*/}
 CUT_GTF=${CUT_GTF%.gtf*}
-let READLENGTH=${read_length_minus_one}+1
-FILENAME=ref_${CUT_REFERENCE}-gtf_${CUT_GTF}-readlength${READLENGTH}
+FILENAME=ref_${CUT_REFERENCE}-gtf_${CUT_GTF}-readlength${read_length}
 
 # Configure output directories with output filename 
 mkdir /home/dnanexus/$FILENAME
@@ -57,6 +56,7 @@ NUMBER_THREADS=${INSTANCE##*_x}
 export REFERENCE=/home/dnanexus/reference_genome_fasta_and_index/*.fa  # Reference genome, standard GRCh38
 GTF=/home/dnanexus/in/annotated_transcripts_gtf/*gtf  # Input .gtf annotation file
 OUTPUT_DIR=/home/dnanexus/$FILENAME
+let READ_LENGTH_MINUS_ONE=${read_length}-1
 
 # Run STAR command to generate genome indices
 sentieon STAR --runThreadN ${NUMBER_THREADS} \
@@ -64,7 +64,7 @@ sentieon STAR --runThreadN ${NUMBER_THREADS} \
     --genomeDir ${OUTPUT_DIR} \
     --genomeFastaFiles ${REFERENCE} \
     --sjdbGTFfile ${GTF} \
-    --sjdbOverhang ${read_length_minus_one}
+    --sjdbOverhang ${READ_LENGTH_MINUS_ONE}
 
 # Tar and gzip output file
 tar -czvf $FILENAME.tar.gz /home/dnanexus/$FILENAME

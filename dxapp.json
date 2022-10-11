@@ -31,14 +31,14 @@
         "label": "annotated_transcripts_gtf",
         "help": "Gzipped gene annotation on reference chromosomes and scaffolds in GTF format. This must be the same genome build as the reference genome.",
         "class": "file",
-        "patterns": ["*.gz"],
+        "patterns": ["*.gtf.gz"],
         "default": {"$dnanexus_link": "file-GGfq5Kj42QQkjj6f4kjG418x"}, 
         "optional": false
         },
         {
-        "name": "read_length_minus_one",
-        "label": "read_length_minus_one",
-        "help": "Read length of data with which the genome indices will be used. Standard for Illumina instruments is 100; so the default for read length minus one is 99",
+        "name": "read_length",
+        "label": "read_length",
+        "help": "Read length of data with which the genome indices will be used. Standard for Illumina instruments is 100; so the default is 100",
         "class": "int",
         "patterns": ["*"],
         "default": 99, 
