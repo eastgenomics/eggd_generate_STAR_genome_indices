@@ -29,7 +29,7 @@
         {
         "name": "annotated_transcripts_gtf",
         "label": "annotated_transcripts_gtf",
-        "help": "Gzipped gene annotation on reference chromosomes and scaffolds in GTF format",
+        "help": "Gzipped gene annotation on reference chromosomes and scaffolds in GTF format. This must be the same genome build as the reference genome.",
         "class": "file",
         "patterns": ["*.gz"],
         "default": {"$dnanexus_link": "file-GGfq5Kj42QQkjj6f4kjG418x"}, 
