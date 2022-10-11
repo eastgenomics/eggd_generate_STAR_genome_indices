@@ -22,7 +22,7 @@
         "label": "reference_genome_fasta_and_index",
         "help": "Tarballed GRCh38 reference genome FASTA + index",
         "class": "file",
-        "patterns": ["*.tar.gz"],
+        "patterns": ["*.fasta-index.tar.gz"],
         "default": {"$dnanexus_link": "file-Fy4j2G04qB6zQK885B5Q8Pqp"}, 
         "optional": false
         },
