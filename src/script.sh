@@ -6,7 +6,6 @@ dx-download-all-inputs # download inputs from json
 
 mkdir /home/dnanexus/genomeDir
 mkdir /home/dnanexus/reference_genome_fasta_and_index
-mkdir /home/dnanexus/gtf
 
 # Unpack tarred input files and decompress gzipped files
 tar xvzf /home/dnanexus/in/sentieon_tar/sentieon-genomics-*.tar.gz -C /usr/local
