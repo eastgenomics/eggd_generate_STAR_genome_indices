@@ -36,13 +36,13 @@
         "optional": false
         },
         {
-          "name": "read_length_minus_one",
-          "label": "read_length_minus_one",
-          "help": "Read length of data with which the genome indices will be used. Standard for Illumina instruments is 100; so the default for read length minus one is 99",
-          "class": "int",
-          "patterns": ["*"],
-          "default": 99, 
-          "optional": false
+        "name": "read_length_minus_one",
+        "label": "read_length_minus_one",
+        "help": "Read length of data with which the genome indices will be used. Standard for Illumina instruments is 100; so the default for read length minus one is 99",
+        "class": "int",
+        "patterns": ["*"],
+        "default": 99, 
+        "optional": false
         }
     ],
     "outputSpec": [
