@@ -72,6 +72,6 @@ tar -czvf $FILENAME.tar.gz /home/dnanexus/$FILENAME
 # Move to /out/ folder to allow output to be uploaded
 mv $FILENAME.tar.gz /home/dnanexus/out/$FILENAME
 
-output_indices=$(dx upload home/dnanexus/out/$FILENAME/$FILENAME.tar.gz --brief)
+output_indices=$(dx upload /home/dnanexus/out/$FILENAME/$FILENAME.tar.gz --brief)
 dx-jobutil-add-output genome_indices "$output_indices" --class=file
 dx-upload-all-outputs
