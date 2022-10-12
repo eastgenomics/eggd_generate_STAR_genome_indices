@@ -20,55 +20,57 @@ SENTIEON_BIN_DIR=$(echo $SENTIEON_INSTALL_DIR/bin)
 
 export PATH="$SENTIEON_BIN_DIR:$PATH"
 
-# NUMBER_THREADS input to STAR needs the number of cores on the server node
+# number_threads input to STAR needs the number of cores on the server node
 # This can be extracted from the DNAnexus instance type
-INSTANCE=$(dx describe --json $DX_JOB_ID | jq -r '.instanceType')  # Extract instance type
+instance=$(dx describe --json $DX_JOB_ID | jq -r '.instanceType')  # Extract instance type
 
 # Output file name will be formatted as follows: 
 # ref_filename-gtf_filename-readlengthN
-REFPATH=/home/dnanexus/in/reference_genome_fasta_and_index/
-REFNAME=( "$REFPATH"*.fasta-index.tar.gz )
-# If there is no file matching the pattern, REFNAME will = *.fasta-index.tar.gz
+# First, extract the reference genome filename and the gtf filename from the path
+refpath=/home/dnanexus/in/reference_genome_fasta_and_index/
+refname=( "$refpath"*.fasta-index.tar.gz )
+# If there is no file matching the pattern, refname will = *.fasta-index.tar.gz
 # Therefore can filter incorrect filenames based on the presence of an asterisk
-if [[ "$REFNAME" == *"*"* ]];
+if [[ "$refname" == *"*"* ]];
     then { echo "Input reference file name not found; possibly missing .fasta-index.tar.gz suffix" >&2; exit 1; }
 fi
-GTFPATH=/home/dnanexus/in/annotated_transcripts_gtf/
-GTFNAME=( "$GTFPATH"*.gtf )
-# If there is no file matching the pattern, GTFNAME will = *.gtf
+gtfpath=/home/dnanexus/in/annotated_transcripts_gtf/
+gtfname=( "$gtfpath"*.gtf )
+# If there is no file matching the pattern, gtfname will = *.gtf
 # Therefore can filter incorrect filenames based on the presence of an asterisk
-if [[ "$GTFNAME" == *"*"* ]];
+if [[ "$gtfname" == *"*"* ]];
     then { echo "Input transcripts gtf file name not found; possibly missing .gtf suffix" >&2; exit 1; }
 fi
-CUT_REFERENCE=${REFNAME##*/}
-CUT_REFERENCE=${CUT_REFERENCE%.fasta-index.tar.gz*}
-CUT_GTF=${GTFNAME##*/}
-CUT_GTF=${CUT_GTF%.gtf*}
-FILENAME=ref_${CUT_REFERENCE}-gtf_${CUT_GTF}-readlength${read_length}
+cut_reference=${refname##*/}  # Cut after the final / in the path to get the filename
+cut_reference=${cut_reference%.fasta-index.tar.gz*}  # Remove the suffix from the filename
+# Repeat for GTF filename:
+cut_gtf=${gtfname##*/} 
+cut_gtf=${cut_gtf%.gtf*}
+# Format output filename
+filename=ref_${cut_reference}-gtf_${cut_gtf}-readlength${read_length}
 
-# Configure output directories with output filename 
-mkdir /home/dnanexus/$FILENAME
+# Create output directory with output filename 
+output_dir=/home/dnanexus/$filename
+mkdir $output_dir
 
 ## Generate genome indices
 # Define input variables for STAR command
-NUMBER_THREADS=${INSTANCE##*_x}
+number_threads=${instance##*_x}
 export REFERENCE=/home/dnanexus/reference_genome_fasta_and_index/*.fa  # Reference genome, standard GRCh38
-GTF=/home/dnanexus/in/annotated_transcripts_gtf/*gtf  # Input .gtf annotation file
-OUTPUT_DIR=/home/dnanexus/$FILENAME
-let READ_LENGTH_MINUS_ONE=${read_length}-1
+gtf=/home/dnanexus/in/annotated_transcripts_gtf/*gtf  # Input .gtf annotation file
+let read_length_minus_one=${read_length}-1
 
 # Run STAR command to generate genome indices
-sentieon STAR --runThreadN ${NUMBER_THREADS} \
+sentieon STAR --runThreadN ${number_threads} \
     --runMode genomeGenerate \
-    --genomeDir ${OUTPUT_DIR} \
+    --genomeDir ${output_dir} \
     --genomeFastaFiles ${REFERENCE} \
-    --sjdbGTFfile ${GTF} \
-    --sjdbOverhang ${READ_LENGTH_MINUS_ONE}
+    --sjdbGTFfile ${gtf} \
+    --sjdbOverhang ${read_length_minus_one}
 
 # Tar and gzip output file
-tar -czvf $FILENAME.tar.gz /home/dnanexus/$FILENAME
-# Move to /out/ folder to allow output to be uploaded
-#mv $FILENAME.tar.gz /home/dnanexus/out/$FILENAME
+tar -czvf $filename.tar.gz /home/dnanexus/$filename
 
-output_indices=$(dx upload /home/dnanexus/$FILENAME.tar.gz --brief)
+# Upload output file
+output_indices=$(dx upload /home/dnanexus/$filename.tar.gz --brief)
 dx-jobutil-add-output genome_indices "$output_indices" --class=file
