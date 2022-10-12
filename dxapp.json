@@ -41,7 +41,7 @@
         "help": "Read length of data with which the genome indices will be used. Standard for Illumina instruments is 100; so the default is 100",
         "class": "int",
         "patterns": ["*"],
-        "default": 99, 
+        "default": 100, 
         "optional": false
         }
     ],
