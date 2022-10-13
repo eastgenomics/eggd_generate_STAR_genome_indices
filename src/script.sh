@@ -56,8 +56,8 @@ mkdir $output_dir
 ## Generate genome indices
 # Define input variables for STAR command
 number_threads=${instance##*_x}
-export REFERENCE=/home/dnanexus/reference_genome_fasta_and_index/*.fa  # Reference genome, standard GRCh38
-gtf=/home/dnanexus/in/annotated_transcripts_gtf/*gtf  # Input .gtf annotation file
+export REFERENCE=/home/dnanexus/reference_genome_fasta_and_index/*.fa  # Reference genome
+gtf=/home/dnanexus/in/annotated_transcripts_gtf/*gtf  # Annotated transcipts GTF
 let read_length_minus_one=${read_length}-1
 
 # Run STAR command to generate genome indices

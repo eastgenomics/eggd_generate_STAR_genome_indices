@@ -5,7 +5,7 @@ This app uses a .gtf file of transcripts and the Sentieon STAR tool to generate 
 
 ## What inputs are required for this app to run?
 * `--sentieon_tar`: (file) Tarballed Sentieon package. Currently defaults to use Sentieon 202112.05
-* `--reference_genome_fasta_and_index`:(file) Tarballed GRCh38 reference genome FASTA + index. Current defaults to use GRCh38.no_alt_analysis_set_chr_mask21.fasta-index.tar.gz in 001_Reference
+* `--reference_genome_fasta_and_index`:(file) Tarballed reference genome FASTA + index. Current defaults to use GRCh38.no_alt_analysis_set_chr_mask21.fasta-index.tar.gz in 001_Reference
 * `--annotated_transcripts_gtf`: (file) File providing gene transcript information. Currently defaults to the GENCODE gtf v41 (gencode.v41.annotation.gtf.gz)
 * `--read_length`: (int) The read length of data with which the genome indices will be used. Standard for Illumina instruments is 100; so the default is 100.
 
